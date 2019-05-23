@@ -8,7 +8,7 @@ const user = {
     token: getToken(),
     username: '',
     avatar: '',
-    roles: []
+    roles: process.env.VUE_APP_LOCAL?['admin']:[]
   },
 
   mutations: {

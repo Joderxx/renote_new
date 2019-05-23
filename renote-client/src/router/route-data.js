@@ -49,9 +49,18 @@ export const constantRoutesData = [
     path: '/401',
     component: () => import('@/views/errorPage/401'),
     hidden: true
-  }
+  },
+
 ]
 
 export const asyncRoutesData = [
+  {
+    path: '/main',
+    component: () => import('@/views/main/index'),
+    name: 'main-page',
+    meta : {
 
+    },
+    hidden: true
+  },
 ]
