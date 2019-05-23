@@ -14,7 +14,7 @@ function hasPermission(roles, permissionRoles) {
   return roles.some(role => permissionRoles.indexOf(role) >= 0)
 }
 
-const whiteList = ['/login', '/auth-redirect','/404','/401'] // no redirect whitelist
+const whiteList = ['/login', '/forget','/register','/auth-redirect'] // no redirect whitelist
 
 router.beforeEach((to, from, next) => {
   NProgress.start() // start progress bar
@@ -61,7 +61,10 @@ router.beforeEach((to, from, next) => {
     }
   } else {
     /* has no token*/
-    if (whiteList.indexOf(to.path) !== -1) {
+    if (process.env.VUE_APP_LOCAL){
+      next()
+      NProgress.done()
+    } else if (whiteList.indexOf(to.path) !== -1) {
       // 在免登录白名单，直接进入
       next()
     } else {
