@@ -1,11 +1,11 @@
 <template>
-    <v-card hright="50" color="info">
+    <v-card hright="50" >
         <v-layout justify-start>
             <v-btn flat icon v-show="$store.getters.sidebar" @click="clickBtn">
-                <v-icon>fa fa-caret-square-o-left</v-icon>
+                <v-icon color="secondary" >allow_left</v-icon>
             </v-btn>
             <v-btn flat icon v-show="!$store.getters.sidebar" @click="clickBtn">
-                <v-icon>fa fa-caret-square-o-right</v-icon>
+                <v-icon color="secondary" >fa fa-caret-square-o-right</v-icon>
             </v-btn>
         </v-layout>
     </v-card>
