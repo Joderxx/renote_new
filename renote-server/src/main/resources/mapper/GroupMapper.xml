@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.renote.server.mapper.GroupMapper">
+    <resultMap id="Group" type="com.renote.core.model.Group">
+        <id property="groupId" column="group_id" />
+        <result property="name" column="name" />
+        <result property="description" column="description" />
+        <collection property="roles" resultMap="com.renote.server.mapper.RoleMapper.Role" />
+    </resultMap>
+</mapper>
