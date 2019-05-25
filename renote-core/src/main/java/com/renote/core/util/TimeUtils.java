@@ -17,7 +17,7 @@ public class TimeUtils {
             HH_MMSS = "HH:mm:ss",
             MM_DD = "MM-dd",
             YYYY_MM_DD_HH_MM = "yyyy-MM-dd HH:mm";
-    public static final long ONE_DAY = 24 * 60 * 60 * 1000;
+    public static final long ONE_DAY = 86400000L;
 
     /**
      * SimpleDateFormat F_YYYY_MM_DD = new SimpleDateFormat(YYYY_MM_DD);
