@@ -10,4 +10,14 @@
         <result property="userId" column="user_id" />
         <result property="watch" column="watch" />
     </resultMap>
+    <insert id="save" parameterType="com.renote.core.model.Advice">
+        insert into advice(message, user_id, create_time, watch)
+        values (#{message},#{userId},#{createTime},#{watch})
+    </insert>
+    <update id="updateWatch">
+        update advice set watch=true where advice_id=#{adviceId}
+    </update>
+    <select id="getUserAdvice" resultType="com.renote.core.model.Advice">
+        select * from advice where user_id=#{userId} order by create_time desc
+    </select>
 </mapper>
