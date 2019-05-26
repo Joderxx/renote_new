@@ -12,10 +12,11 @@ public class ShareNote {
     private Long shareId;
     private String filename;
     private String type;
-    private Long createTime;
+    private Long expiredTime;
     private Long privateId;
     private Long userId;
     private String sign;
     private Boolean key;
-
+    private Integer watch;
+    private Integer comment;
 }

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.renote.server.mapper.GroupRoleMapper">
+
+    <insert id="save">
+        insert into group_role(group_id, role_id)
+        values (#{groupId}, #{roleId})
+    </insert>
+    <delete id="delete">
+        delete
+        from group_role
+        where group_id = #{groupId}
+          and role_id = #{roleId}
+    </delete>
+</mapper>

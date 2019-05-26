@@ -4,8 +4,43 @@
 
 <mapper namespace="com.renote.server.mapper.RoleMapper">
     <resultMap id="Role" type="com.renote.core.model.Role">
-        <id property="roleId" column="role_id" />
-        <result property="name" column="name" />
-        <result property="description" column="description" />
+        <id property="roleId" column="role_id"/>
+        <result property="name" column="name"/>
+        <result property="description" column="description"/>
     </resultMap>
+
+    <insert id="save">
+        insert into `role`(name, description)
+        values (#{name}, #{description})
+    </insert>
+    <update id="update">
+        update `role` set
+        <trim suffixOverrides=",">
+            <if test="@com.renote.core.util.StringUtils@isNotEmpty(name)">
+                name=#{name},
+            </if>
+            <if test="@com.renote.core.util.StringUtils@isNotEmpty(description)">
+                description=#{description},
+            </if>
+        </trim>
+        where role_id=#{roleId}
+    </update>
+    <delete id="delete">
+        delete
+        from role
+        where role_id = #{roleId}
+    </delete>
+    <select id="get" resultMap="Role">
+        select *
+        from role
+        where role_id = #{roleId}
+    </select>
+
+    <select id="getList" resultMap="Role">
+        select r.role_id, name, description
+        from group_role gr,
+             role r
+        where gr.role_id = r.role_id
+          and gr.group_id = #{groupId}
+    </select>
 </mapper>

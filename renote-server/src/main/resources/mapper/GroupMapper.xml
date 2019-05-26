@@ -4,9 +4,36 @@
 
 <mapper namespace="com.renote.server.mapper.GroupMapper">
     <resultMap id="Group" type="com.renote.core.model.Group">
-        <id property="groupId" column="group_id" />
-        <result property="name" column="name" />
-        <result property="description" column="description" />
-        <collection property="roles" resultMap="com.renote.server.mapper.RoleMapper.Role" />
+        <id property="groupId" column="group_id"/>
+        <result property="name" column="name"/>
+        <result property="description" column="description"/>
+        <collection property="roles" resultMap="com.renote.server.mapper.RoleMapper.Role"
+                    select="com.renote.server.mapper.RoleMapper.getList"/>
     </resultMap>
+    <insert id="save">
+        insert into `group`(name, description)
+        values (#{name}, #{description})
+    </insert>
+    <update id="update">
+        update `group` set
+        <trim suffixOverrides=",">
+            <if test="@com.renote.core.util.StringUtils@isNotEmpty(name)">
+                name=#{name},
+            </if>
+            <if test="@com.renote.core.util.StringUtils@isNotEmpty(description)">
+                description=#{description},
+            </if>
+        </trim>
+        where group_id=#{groupId}
+    </update>
+    <delete id="delete">
+        delete
+        from `group`
+        where group_id = #{groupId}
+    </delete>
+    <select id="get" resultMap="Group">
+        select *
+        from `group`
+        where group_id = #{groupId}
+    </select>
 </mapper>

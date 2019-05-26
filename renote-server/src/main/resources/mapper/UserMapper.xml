@@ -3,7 +3,70 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="com.renote.server.mapper.UserMapper">
-    <resultMap id="User" type="com.renote.core.model.User">
 
-    </resultMap>
+    <insert id="save">
+        insert into user(username, password, create_time, group_id, email)
+        values (#{username}, #{password}, #{create_time}, #{group_id}, #{email})
+    </insert>
+    <update id="update">
+        update user
+        set
+        <trim suffixOverrides=",">
+            <if test="@com.renote.core.util.StringUtils@isNotEmpty(password)">
+                password=#{password},
+            </if>
+            <if test="groupId != null">
+                group_id=#{groupId},
+            </if>
+            <if test="@com.renote.core.util.StringUtils@isNotEmpty(email)">
+                email=#{email},
+            </if>
+            <if test="vip != null">
+                vip=#{vip},
+            </if>
+            <if test="experience != null">
+                experience=#{experience},
+            </if>
+            <if test="level != null">
+                level=#{level},
+            </if>
+            <if test="reward != null">
+                reward=#{reward},
+            </if>
+            <if test="expireTime != null">
+                expire_time=#{expireTime},
+            </if>
+            <if test="@com.renote.core.util.StringUtils@isNotEmpty(phone)">
+                phone=#{phone},
+            </if>
+            <if test="@com.renote.core.util.StringUtils@isNotEmpty(qq)">
+                qq=#{qq},
+            </if>
+            <if test="@com.renote.core.util.StringUtils@isNotEmpty(wechat)">
+                wechat=#{wechat},
+            </if>
+            <if test="@com.renote.core.util.StringUtils@isNotEmpty(alipay)">
+                alipay=#{alipay},
+            </if>
+            <if test="@com.renote.core.util.StringUtils@isNotEmpty(github)">
+                github=#{github},
+            </if>
+        </trim>
+    </update>
+    <delete id="delete">
+        delete
+        from user
+        where user_id = #{userId}
+    </delete>
+    <select id="getUserById" resultType="com.renote.core.model.User">
+        select *
+        from user
+        where user_id = #{userId}
+    </select>
+    <select id="getUser" resultType="com.renote.core.model.User">
+        select *
+        from user
+        where password = #{password}
+          and (username = #{username} or email = #{email})
+    </select>
 </mapper>

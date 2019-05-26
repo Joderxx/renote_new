@@ -1,7 +1,6 @@
 package com.renote.server.mapper;
 
 import com.renote.core.model.Advice;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -10,7 +9,6 @@ import java.util.List;
  * @author joder
  * @create 19-5-25
  **/
-@Mapper
 public interface AdviceMapper {
 
     /**
@@ -31,6 +29,7 @@ public interface AdviceMapper {
 
     /**
      * 修改通知为已读
+     *
      * @param adviceId
      * @return
      */

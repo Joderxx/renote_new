@@ -3,7 +3,29 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="com.renote.server.mapper.WordMapper">
-    <resultMap id="Word" type="com.renote.core.model.Word">
 
-    </resultMap>
+    <insert id="save">
+        insert into word(name, url, description) values (#{name},#{url},#{description})
+    </insert>
+    <update id="update">
+        update `word` set
+        <trim suffixOverrides=",">
+            <if test="@com.renote.core.util.StringUtils@isNotEmpty(name)">
+                name=#{name},
+            </if>
+            <if test="@com.renote.core.util.StringUtils@isNotEmpty(description)">
+                description=#{description},
+            </if>
+            <if test="@com.renote.core.util.StringUtils@isNotEmpty(url)">
+                url=#{url},
+            </if>
+        </trim>
+        where word_id=#{wordId}
+    </update>
+    <delete id="delete">
+        delete from word where name=#{name}
+    </delete>
+    <select id="get" resultType="com.renote.core.model.Word">
+        select * from word where name=#{name}
+    </select>
 </mapper>

@@ -10,6 +10,8 @@ import lombok.Data;
 public class NoteContent {
 
     private Long contentId;
+    private Long privateId;
+    private Long createTime;
     private byte[] content;
     private String tags;
 }

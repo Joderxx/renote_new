@@ -14,4 +14,5 @@ public class Avatar {
     private Long createTime;
     private Long modifiedTime;
     private String suffix;
+    private Long userId;
 }

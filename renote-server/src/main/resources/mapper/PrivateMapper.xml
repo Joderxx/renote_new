@@ -3,7 +3,41 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="com.renote.server.mapper.PrivateMapper">
-    <resultMap id="PrivateNote" type="com.renote.core.model.PrivateNote">
 
-    </resultMap>
+    <insert id="save">
+        insert into private_note(filename, type, create_time, user_id, parent_id, source, suffix, del)
+        values (#{filename}, #{type}, #{createTime}, #{userId}, #{parentId}, #{source}, #{suffix}, false)
+    </insert>
+    <update id="update">
+        update private_note
+        set
+        <trim suffixOverrides=",">
+            <if test="@com.renote.core.util.StringUtils@isNotEmpty(filename)">
+                filename=#{filename},
+            </if>
+            <if test="parentId != null">
+                parent_id=#{parentId},
+            </if>
+            <if test="del != null">
+                del=#{del},
+            </if>
+        </trim>
+        where private_id=#{privateId}
+    </update>
+    <delete id="delete">
+        delete
+        from private_note
+        where private_id = #{privateId}
+    </delete>
+    <select id="existName" resultType="java.lang.Integer">
+        select count(1)
+        from private_note
+        where parent_id = #{parentId}
+          and user_id = #{userId}
+          and type = #{type}
+          and filename = #{filename}
+    </select>
+    <select id="getList" resultType="com.renote.core.model.PrivateNote">
+        select * from private_note where user_id=#{userId} and parent_id=#{parentId}
+    </select>
 </mapper>

@@ -3,7 +3,21 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="com.renote.server.mapper.CommentMapper">
-    <resultMap id="Comment" type="com.renote.core.model.Comment">
 
-    </resultMap>
+    <insert id="save">
+        insert into comment(content, create_time, user_id, public_id, share_id, parent_id)
+        values (#{content}, #{createTime}, #{userId}, #{publicId}, #{shareId}, #{parentId})
+    </insert>
+    <delete id="delete">
+        delete from comment where comment_id=#{comment}
+    </delete>
+    <select id="get" resultType="com.renote.core.model.Comment">
+        select * from comment where comment_id=#{commentId}
+    </select>
+    <select id="getPublicList" resultType="com.renote.core.model.Comment">
+        select * from comment where parent_id=#{parentId} and public_id=#{publicId}
+    </select>
+    <select id="getShareList" resultType="com.renote.core.model.Comment">
+        select * from comment where parent_id=#{parentId} and share_id=#{shareId}
+    </select>
 </mapper>

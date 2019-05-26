@@ -3,7 +3,27 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="com.renote.server.mapper.ShareMapper">
-    <resultMap id="ShareNote" type="com.renote.core.model.ShareNote">
 
-    </resultMap>
+    <insert id="save">
+        insert into share_note(filename, type, expired_time, private_id, user_id, sign, `key`)
+        values (#{filename}, #{type}, #{expiredTime}, #{privateId}, #{userId}, #{sign}, #{key})
+    </insert>
+    <update id="update">
+        update share_note
+        set sign=#{sign},
+            expired_time=#{expiredTime}
+        where share_id = #{shareId}
+    </update>
+    <delete id="delete">
+        delete
+        from share_note
+        where share_id = #{shareId}
+    </delete>
+    <select id="get" resultType="com.renote.core.model.ShareNote">
+        select *
+        from share_note
+        where share_id = #{shareId}
+          and sign = #{sign}
+          and (expired_time = -1 or expired_time > unix_timestamp(now()) * 1000)
+    </select>
 </mapper>

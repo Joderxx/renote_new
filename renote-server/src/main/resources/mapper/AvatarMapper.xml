@@ -4,10 +4,34 @@
 
 <mapper namespace="com.renote.server.mapper.AvatarMapper">
     <resultMap id="Avatar" type="com.renote.core.model.Avatar">
-        <id property="avatarId" column="avatar_id" />
-        <result property="createTime" column="create_time" />
-        <result property="content" column="content" />
-        <result property="modifiedTime" column="modified_time" />
-        <result property="suffix" column="suffix" />
+        <id property="avatarId" column="avatar_id"/>
+        <result property="createTime" column="create_time"/>
+        <result property="content" column="content"/>
+        <result property="modifiedTime" column="modified_time"/>
+        <result property="suffix" column="suffix"/>
+        <result property="userId" column="user_id"/>
     </resultMap>
+    <insert id="save" parameterType="com.renote.core.model.Avatar">
+        insert into avatar(content, create_time, modified_time, suffix)
+        values (#{content}, #{createTime}, #{modifiedTime}, #{suffix})
+    </insert>
+    <update id="updateTime">
+        update avatar
+        set modified_time=#{modifiedTime}
+        where avatar_id = #{avatarId}
+    </update>
+
+    <select id="getAvatar" resultType="com.renote.core.model.Avatar">
+        select *
+        from avatar
+        where user_id = #{userId}
+        order by modified_time desc
+        limit 1
+    </select>
+    <select id="getHistoryAvatars" resultType="com.renote.core.model.Avatar">
+        select *
+        from avatar
+        where user_id = #{userId}
+        order by modified_time desc
+    </select>
 </mapper>

@@ -3,7 +3,42 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="com.renote.server.mapper.PublicMapper">
-    <resultMap id="PublicNote" type="com.renote.core.model.PublicNote">
-
-    </resultMap>
+    <insert id="save">
+        insert into public_note(filename, type, create_time, user_id, private_id, parent_id)
+        values (#{filename}, #{type}, #{createTime}, #{userId}, #{privateId}, #{parentId})
+    </insert>
+    <update id="update">
+        update public_note
+        set
+        <trim suffixOverrides=",">
+            <if test="@com.renote.core.util.StringUtils@isNotEmpty(filename)">
+                filename=#{filename},
+            </if>
+            <if test="parentId != null">
+                parent_id=#{parentId},
+            </if>
+        </trim>
+        where public_id=#{collectId}
+    </update>
+    <update id="incrWatch">
+        update public_note
+        set watch=watch + 1
+        where public_id = #{publicId}
+    </update>
+    <update id="incrComment">
+        update public_note
+        set comment=comment + 1
+        where public_id = #{publicId}
+    </update>
+    <delete id="delete">
+        delete
+        from public_note
+        where public_id = #{publicId}
+    </delete>
+    <select id="getDirList" resultType="com.renote.core.model.PublicNote">
+        select *
+        from public_note
+        where user_id = #{userId}
+          and parent_id = #{parentId}
+    </select>
 </mapper>

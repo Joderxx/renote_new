@@ -4,4 +4,32 @@
 
 <mapper namespace="com.renote.server.mapper.CollectMapper">
 
+    <insert id="save">
+        insert into collect_note(filename, type, create_time, user_id, private_id, parent_id)
+        values (#{filename}, #{type}, #{createTime}, #{userId}, #{privateId}, #{parentId})
+    </insert>
+    <update id="update">
+        update collect_note
+        set
+        <trim suffixOverrides=",">
+            <if test="@com.renote.core.util.StringUtils@isNotEmpty(filename)">
+                filename=#{filename},
+            </if>
+            <if test="parentId != null">
+                parent_id=#{parentId},
+            </if>
+        </trim>
+        where collect_id=#{collectId}
+    </update>
+    <delete id="delete">
+        delete
+        from collect_note
+        where collect_id = #{collectId}
+    </delete>
+    <select id="getDirList" resultType="com.renote.core.model.CollectNote">
+        select *
+        from collect_note
+        where user_id = #{userId}
+          and parent_id = #{parentId}
+    </select>
 </mapper>

@@ -3,7 +3,25 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="com.renote.server.mapper.NoteContentMapper">
-    <resultMap id="NoteContent" type="com.renote.core.model.NoteContent">
 
-    </resultMap>
+    <insert id="save">
+        insert into note_content(private_id, create_time, content, tags)
+        values (#{privateId}, #{createTime}, #{content}, #{tags})
+    </insert>
+    <update id="updateTag">
+        update note_content
+        set tags=#{tags}
+        where content_id = #{contentId}
+    </update>
+    <select id="get" resultType="com.renote.core.model.NoteContent">
+        select *
+        from note_content
+        where content_id = #{contentId}
+    </select>
+    <select id="getTimeList" resultType="com.renote.core.model.NoteContent">
+        select content_id, create_time
+        from note_content
+        where private_id = #{privateId}
+        order by create_time desc
+    </select>
 </mapper>

@@ -16,7 +16,5 @@ public class CollectNote {
     private Long userId;
     private Long privateId;
     private Long parentId;
-    private Integer watch;
-    private Integer comment;
 
 }

@@ -15,7 +15,6 @@ public class PrivateNote {
     private Long createTime;
     private Long userId;
     private Long parentId;
-    private Long contentId;
     private String source;
     private String suffix;
     private Boolean del;
