@@ -35,4 +35,11 @@ public interface AdviceMapper {
      */
     int updateWatch(@Param("adviceId") Long adviceId);
 
+    /**
+     * 查看多少未读
+     * @param userId
+     * @return
+     */
+    int getUnWatch(Long userId);
+
 }

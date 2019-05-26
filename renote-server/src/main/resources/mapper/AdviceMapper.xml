@@ -25,4 +25,7 @@
         where user_id = #{userId}
         order by create_time desc
     </select>
+    <select id="getUnWatch" resultType="java.lang.Integer">
+        select count(1) from advice where user_id=#{userId} and watch=false
+    </select>
 </mapper>

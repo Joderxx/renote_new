@@ -91,4 +91,8 @@ public class TimeUtils {
     public static boolean compare(Date date1, Date date2) {
         return diffDay(date1, date2) > 0;
     }
+
+    public static long getExpiredTime(int minutes){
+        return getNow()+(minutes*60*1000);
+    }
 }

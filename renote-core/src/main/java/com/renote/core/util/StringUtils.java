@@ -17,10 +17,10 @@ public class StringUtils {
         return !isEmpty(str);
     }
 
-    public static String concat(String... arr) {
+    public static String concat(Object... arr) {
         StringBuilder sb = new StringBuilder();
         if (arr.length > 0) {
-            for (String e : arr) {
+            for (Object e : arr) {
                 sb.append(e);
             }
         }
