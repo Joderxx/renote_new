@@ -38,8 +38,8 @@ public interface UserMapper {
 
     /**
      * 登录
-     * @param user
+     * @param username
      * @return
      */
-    User getUser(User user);
+    User getUser(String username);
 }

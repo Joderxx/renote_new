@@ -11,5 +11,6 @@ public class Role {
 
     private Integer roleId;
     private String name;
+    private String url;
     private String description;
 }

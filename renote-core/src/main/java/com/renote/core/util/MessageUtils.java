@@ -19,6 +19,10 @@ public class MessageUtils {
         return message;
     }
 
+    public static <T> Message<T> buildSuccess(String msg, T data) {
+        return build(successCode, msg, data);
+    }
+
     public static <T> Message<T> buildSuccess(T data) {
         return build(successCode, successMsg, data);
     }

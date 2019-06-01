@@ -6,18 +6,22 @@
     <resultMap id="Role" type="com.renote.core.model.Role">
         <id property="roleId" column="role_id"/>
         <result property="name" column="name"/>
+        <result property="url" column="url"/>
         <result property="description" column="description"/>
     </resultMap>
 
     <insert id="save">
-        insert into `role`(name, description)
-        values (#{name}, #{description})
+        insert into `role`(name, url, description)
+        values (#{name}, #{url}, #{description})
     </insert>
     <update id="update">
         update `role` set
         <trim suffixOverrides=",">
             <if test="@com.renote.core.util.StringUtils@isNotEmpty(name)">
                 name=#{name},
+            </if>
+            <if test="@com.renote.core.util.StringUtils@isNotEmpty(url)">
+                url=#{url},
             </if>
             <if test="@com.renote.core.util.StringUtils@isNotEmpty(description)">
                 description=#{description},
@@ -37,7 +41,7 @@
     </select>
 
     <select id="getList" resultMap="Role">
-        select r.role_id, name, description
+        select r.role_id, r.name, r.url, r.description
         from group_role gr,
              role r
         where gr.role_id = r.role_id

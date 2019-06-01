@@ -30,6 +30,7 @@ public class UserTipSocket {
     private static ConcurrentMap<Long, SocketEntry> map = new ConcurrentHashMap<>();
     private static Thread thread = null;
 
+    //定时清除过时连接
     static {
         thread = new Thread(() -> {
             while (true) {
